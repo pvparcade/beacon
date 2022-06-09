@@ -1,0 +1,9 @@
+server:
+  id: "lobby-1"
+  display-name: "Lobby #1"
+  category: "lobbies"
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  password: "foobared"
+  authenticate: true
