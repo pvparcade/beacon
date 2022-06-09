@@ -2,6 +2,8 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     `java-library`
+    id("signing")
+    id("maven-publish")
     id("io.papermc.paperweight.userdev") version "1.3.6"
     id("net.minecrell.plugin-yml.bukkit") version "0.5.1"
     id("com.github.johnrengelman.shadow") version "7.1.2"
@@ -50,4 +52,26 @@ tasks {
 bukkit {
     main = "dev.pvparcade.beacon.BeaconPlugin"
     authors = listOf("noelvnx")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            name = "blueoxygen"
+
+            val releasesRepoUrl = uri("https://repo.blueoxygen.net/releases")
+            val snapshotsRepoUrl = uri("https://repo.blueoxygen.net/snapshots")
+            url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+
+            credentials(PasswordCredentials::class)
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+        }
+    }
 }
