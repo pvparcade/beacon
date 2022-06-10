@@ -9,8 +9,8 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-group = "dev.noelvnx"
-version = "1.0-SNAPSHOT"
+group = "dev.pvparcade"
+version = "1.0"
 description = "A plugin to manage Bukkit server instances"
 
 java {
